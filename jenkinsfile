@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     stages {
-                        stage('Build Image'){
-            steps{
-                sh 'docker build -t flask-frontend:${params.flask_version} .'
+        stage('Build Image') {
+            steps {
+                sh "docker build -t flask-frontend:${params.flask_version} ."
             }
         }
-                stage('flask Deploy'){
-            steps{
+        stage('flask Deploy') {
+            steps {
                 sh 'kubectl apply -f flask-deployment.yaml'
             }
         }
@@ -17,7 +17,5 @@ pipeline {
                 sh 'kubectl get all --namespace flask-space'
             }
         }
-
-
     }
 }
